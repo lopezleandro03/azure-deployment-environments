@@ -1,5 +1,5 @@
 name: App end to end sample
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   deploy-environment:

@@ -1,5 +1,5 @@
 name: Environment provisioning sample
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   deploy-environment:
