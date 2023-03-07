@@ -1,4 +1,4 @@
-name: demo
+name: Web app environment provisioning sample
 on:
   push:
     branches:

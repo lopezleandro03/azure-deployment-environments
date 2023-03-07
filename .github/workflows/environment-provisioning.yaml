@@ -1,4 +1,4 @@
-name: Environment provisioning sample
+name: Serverless environment provisioning sample
 on: [workflow_dispatch]
 
 jobs:
