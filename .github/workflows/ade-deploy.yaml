@@ -11,6 +11,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Add Azure CLI DevCenter extension
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+          az extension add --source https://fidalgosetup.blob.core.windows.net/cli-extensions/devcenter-0.1.0-py3-none-any.whl --yes
+
     - name: Azure Deployment Environment(ADE) - Create environment
       uses: azure/CLI@v1
       with:
