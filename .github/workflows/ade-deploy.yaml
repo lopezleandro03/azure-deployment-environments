@@ -20,7 +20,7 @@ jobs:
           az devcenter dev environment create --dev-center-name dc-devx --project-name the-phoenix-project --environment-name my-cicd-environment --environment-type sandbox --catalog-item-name FunctionApp --catalog-name  CommunityTemplates
 
   deploy-app:
-    depends-on: deploy-environment
+    needs: [deploy-environment]
     runs-on: ubuntu-latest
     steps:
 
@@ -31,7 +31,7 @@ jobs:
       run: echo "deploy web api"
 
   load-testing:
-    depends-on: deploy-app
+    needs: [deploy-app]
     runs-on: ubuntu-latest
     steps:
 
@@ -45,7 +45,7 @@ jobs:
       run: echo "push results"
 
   delete-environment:
-    depends-on: load-testing
+    needs: [deploy-environment, deploy-app, load-testing]
     runs-on: ubuntu-latest
     steps:
 
