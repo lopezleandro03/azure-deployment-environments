@@ -17,7 +17,13 @@ jobs:
         azcliversion: 2.45.0
         inlineScript: |
           az extension add --name devcenter --yes
-          az devcenter dev environment create --dev-center-name dc-devx --project-name the-phoenix-project --environment-name workflow-on-demand-environment --environment-type sandbox --catalog-item-name FunctionApp --catalog-name  CommunityTemplates
+          az devcenter dev environment create \
+              --dev-center-name dc-devx \
+              --project-name the-phoenix-project \
+              --environment-name workflow-on-demand-environment \
+              --environment-type sandbox \
+              --catalog-item-name FunctionApp \
+              --catalog-name  CommunityTemplates
 
   build-and-deploy-webapp:
     needs: [deploy-environment]
@@ -89,5 +95,8 @@ jobs:
         azcliversion: 2.45.0
         inlineScript: |
           az extension add --name devcenter --yes
-          # az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name my-cicd-environment --yes
-          az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name workflow-on-demand-environment --yes
+          az devcenter dev environment delete \
+              --dev-center-name dc-devx \
+              --project-name the-phoenix-project \
+              --name workflow-on-demand-environment \
+              --yes
