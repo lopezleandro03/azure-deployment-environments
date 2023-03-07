@@ -1,0 +1,27 @@
+name: ADE demo
+on: [workflow_dispatch]
+
+jobs:
+build-and-deploy:
+  runs-on: ubuntu-latest
+  steps:
+
+  - name: Log in with Azure
+    uses: azure/login@v1
+    with:
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+  - name: Azure Deployment Environment(ADE) - Create environment
+    uses: azure/CLI@v1
+    with:
+      azcliversion: 2.0.72
+      inlineScript: |
+        # $params = "{ 'name': 'firstMsi', 'location': 'northeurope' }"
+        az devcenter dev environment create `
+          --dev-center-name dc-devx `
+          --project-name the-phoenix-project `
+          --environment-name my-cicd-environment `
+          --environment-type sandbox `
+          --catalog-item-name FunctionApp `
+          --catalog-name  CommunityTemplates `
+          # --parameters $params
