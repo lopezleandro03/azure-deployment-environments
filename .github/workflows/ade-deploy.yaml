@@ -11,19 +11,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Add Azure CLI DevCenter extension
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.45.0
-        inlineScript: |
-
     - name: Azure Deployment Environment(ADE) - Create environment
       uses: azure/CLI@v1
       with:
         azcliversion: 2.45.0
         inlineScript: |
           az extension add --name devcenter --yes
-          
+
           # $params = "{ 'name': 'firstMsi', 'location': 'northeurope' }"
           az devcenter dev environment create `
             --dev-center-name dc-devx `
