@@ -18,12 +18,4 @@ jobs:
         inlineScript: |
           az extension add --name devcenter --yes
 
-          # $params = "{ 'name': 'firstMsi', 'location': 'northeurope' }"
-          az devcenter dev environment create `
-            --dev-center-name dc-devx `
-            --project-name the-phoenix-project `
-            --environment-name my-cicd-environment `
-            --environment-type sandbox `
-            --catalog-item-name FunctionApp `
-            --catalog-name  CommunityTemplates `
-            # --parameters $params
+          az devcenter dev environment create --dev-center-name dc-devx --project-name the-phoenix-project --environment-name my-cicd-environment --environment-type sandbox --catalog-item-name FunctionApp --catalog-name  CommunityTemplates
