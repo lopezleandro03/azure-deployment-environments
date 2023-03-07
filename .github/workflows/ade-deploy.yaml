@@ -24,39 +24,57 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: deploy web app
-      run: echo "deploy web app"
-
     # wait 10 seconds
-    - name: Wait 10 minutes
+    - name: Build kotlin web app
       uses: jakejarvis/wait-action@master
       with:
-        time: '5m'
+        time: '10s'
+
+    # wait 10 seconds
+    - name: Deploy kotlin web app to environment
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
 
   build-and-deploy-api:
     needs: [deploy-environment]
     runs-on: ubuntu-latest
     steps:
 
-    - name: deploy web api
-      run: echo "deploy web api"
+    # wait 10 seconds
+    - name: Build API
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
 
-  load-testing:
+    # wait 10 seconds
+    - name: Deploy API to environment
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+
+  test:
     needs: [build-and-deploy-webapp, build-and-deploy-api]
     runs-on: ubuntu-latest
     steps:
 
     - name: init
       run: echo "init"
-    
-    - name: load test
-      run: echo "load test"
+
+    - name: init
+      run: echo "Unit testing"
+
+    # wait 10 seconds
+    - name: Load testing
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '30s'
     
     - name: publish results
       run: echo "push results"
 
   delete-environment:
-    needs: [load-testing]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
 
