@@ -19,7 +19,7 @@ jobs:
           az extension add --name devcenter --yes
           az devcenter dev environment create --dev-center-name dc-devx --project-name the-phoenix-project --environment-name my-cicd-environment --environment-type sandbox --catalog-item-name FunctionApp --catalog-name  CommunityTemplates
 
-  deploy-app:
+  build-and-deploy-webapp:
     needs: [deploy-environment]
     runs-on: ubuntu-latest
     steps:
@@ -27,11 +27,22 @@ jobs:
     - name: deploy web app
       run: echo "deploy web app"
 
+    # wait 10 seconds
+    - name: Wait 10 minutes
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '5m'
+
+  build-and-deploy-api:
+    needs: [deploy-environment]
+    runs-on: ubuntu-latest
+    steps:
+
     - name: deploy web api
       run: echo "deploy web api"
 
   load-testing:
-    needs: [deploy-app]
+    needs: [build-and-deploy-webapp, build-and-deploy-api]
     runs-on: ubuntu-latest
     steps:
 
@@ -45,7 +56,7 @@ jobs:
       run: echo "push results"
 
   delete-environment:
-    needs: [deploy-environment, deploy-app, load-testing]
+    needs: [load-testing]
     runs-on: ubuntu-latest
     steps:
 
@@ -60,4 +71,4 @@ jobs:
         azcliversion: 2.45.0
         inlineScript: |
           az extension add --name devcenter --yes
-          az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name my-cicd-environment
+          az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name my-cicd-environment --yes
