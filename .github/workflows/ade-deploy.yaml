@@ -17,5 +17,44 @@ jobs:
         azcliversion: 2.45.0
         inlineScript: |
           az extension add --name devcenter --yes
-
           az devcenter dev environment create --dev-center-name dc-devx --project-name the-phoenix-project --environment-name my-cicd-environment --environment-type sandbox --catalog-item-name FunctionApp --catalog-name  CommunityTemplates
+
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: deploy web app
+      run: echo "deploy web app"
+
+    - name: deploy web api
+      run: echo "deploy web api"
+
+  load-testing:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: init
+      run: echo "init"
+    
+    - name: load test
+      run: echo "load test"
+    
+    - name: publish results
+      run: echo "push results"
+
+  deploy-environment:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Log in with Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure Deployment Environment(ADE) - Delete environment
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.45.0
+        inlineScript: |
+          az extension add --name devcenter --yes
+          az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name my-cicd-environment
