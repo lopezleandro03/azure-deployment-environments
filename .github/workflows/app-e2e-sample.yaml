@@ -1,4 +1,4 @@
-name: ADE demo
+name: App end to end sample
 on: [push]
 
 jobs:
