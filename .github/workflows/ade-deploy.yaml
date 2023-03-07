@@ -1,5 +1,5 @@
 name: ADE demo
-on: [workflow_dispatch]
+on: [push]
 
 jobs:
   deploy-environment:
@@ -89,4 +89,5 @@ jobs:
         azcliversion: 2.45.0
         inlineScript: |
           az extension add --name devcenter --yes
-          az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name workflow-on-demand-environment --yes
+          az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name my-cicd-environment --yes
+          # az devcenter dev environment delete --dev-center-name dc-devx --project-name the-phoenix-project --name workflow-on-demand-environment --yes
