@@ -1,4 +1,4 @@
-name: App end to end sample
+name: Environment provisioning sample
 on: [push]
 
 jobs:
