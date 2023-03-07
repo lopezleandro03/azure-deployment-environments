@@ -14,14 +14,15 @@ jobs:
     - name: Add Azure CLI DevCenter extension
       uses: azure/CLI@v1
       with:
-        azcliversion: 2.0.72
+        azcliversion: 2.45.0
         inlineScript: |
-          az extension add --name devcenter --yes          
+          az extension add --name devcenter --yes
+          # az extension add --source "https://fidalgosetup.blob.core.windows.net/cli-extensions/devcenter-0.1.0-py3-none-any.whl" --yes
 
     - name: Azure Deployment Environment(ADE) - Create environment
       uses: azure/CLI@v1
       with:
-        azcliversion: 2.0.72
+        azcliversion: 2.45.0
         inlineScript: |
           # $params = "{ 'name': 'firstMsi', 'location': 'northeurope' }"
           az devcenter dev environment create `
