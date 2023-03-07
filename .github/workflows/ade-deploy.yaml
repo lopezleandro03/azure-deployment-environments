@@ -42,7 +42,7 @@ jobs:
     - name: publish results
       run: echo "push results"
 
-  deploy-environment:
+  delete-environment:
     runs-on: ubuntu-latest
     steps:
 
