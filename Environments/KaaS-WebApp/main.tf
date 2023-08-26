@@ -13,8 +13,9 @@ terraform {
 }
 
 provider "azurerm" {
-  features {
-  }
+  features {}
+
+  skip_provider_registration = true
 }
 
 # configure the GitHub provider to use the token stored in the Key Vault
