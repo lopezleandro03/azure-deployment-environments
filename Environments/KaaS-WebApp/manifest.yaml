@@ -1,0 +1,14 @@
+name: KaaS-WebApp
+summary: Creates a web app environment on KaaS
+description: Creates a web app environment on KaaS
+runner: Terraform
+templatePath: main.tf
+# parameters:
+#   - id: "resource_name"
+#     name: "Resource Name"
+#     required: true
+#     type: "string"
+#   - id: "location"
+#     name: "Location"
+#     required: true
+#     type: "string"
