@@ -1,0 +1,26 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ${app_name}
+  namespace: ${app_name}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 16m
+spec:
+  tls:
+  - hosts:
+    - ade-kaas-demo.westeurope.cloudapp.azure.com
+    # secretName: {{Kubernetes Secret name with TLS/SSL Certificate}}
+  rules:
+  - host: ade-kaas-demo.westeurope.cloudapp.azure.com
+    http:
+      paths:
+      - path: /${app_name}
+        pathType: Prefix
+        backend:
+          service:
+            name: ${app_name}
+            port:
+              number: 80

@@ -10,7 +10,11 @@ variable "key_vault_id" {
   default     = "/subscriptions/4ad9490b-017e-4a82-8892-39c294f3af9c/resourceGroups/rg-azd-devcenter/providers/Microsoft.KeyVault/vaults/akv-ntawodiyy2yzy"
 }
 
-# variable "resource_group_name" {}
+variable "app_name" {
+  type        = string
+  description = "The name of the application."
+  default = "ghost2"
+}
 
 # variable "resource_name" {}
 
