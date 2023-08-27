@@ -4,7 +4,7 @@
       {
         "type": 1,
         "content": {
-          "json": "# Let's go!\r\n\r\nYour environment is up & running!\r\n\r\n# Application metadata\r\n\r\n- Web App URL: ${app_url}\r\n- Expose all the output you like",
+          "json": "# Your environment is up & running!\r\n\r\n# Application metadata:\r\n\r\n- Web App URL: ${app_url}\r\n- Kubernetes namespace: ${app_name}\r\n- (Expose other data by customizing the workbook)",
           "style": "success"
         },
         "name": "text - 0"

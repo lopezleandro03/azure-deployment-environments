@@ -159,7 +159,8 @@ resource "azapi_resource" "workbook" {
       sourceId = data.azurerm_resource_group.rg.id
       serializedData = templatefile("workbook-template/workbook.json", 
         {
-            app_url = "https://${local.k8s_app_host}/${local.k8s_app_name}"
+            app_url = "https://${local.k8s_app_host}/${local.k8s_app_name}",
+            app_name = local.k8s_app_name,
         })
     }
     kind = "shared"
