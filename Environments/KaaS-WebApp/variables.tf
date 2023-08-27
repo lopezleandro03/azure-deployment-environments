@@ -15,7 +15,3 @@ variable "app_name" {
   description = "The name of the application."
   default = "ghost2"
 }
-
-# variable "resource_name" {}
-
-# variable "location" {}
