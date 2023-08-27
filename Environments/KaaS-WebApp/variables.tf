@@ -21,3 +21,15 @@ variable "resource_group_name" {
     description = "The name of the resource group to create the App Service Plan in."
     default     = "rg-azd-devcenter"
 }
+
+variable "container_image" {
+    type        = string
+    description = "The name of the container image to deploy."
+    default     = "ghost:3.42.5-alpine"
+}
+
+variable "env_vars" {
+    type        = map(string)
+    description = "A map of environment variables to set on the container."
+    default     = {}  
+}

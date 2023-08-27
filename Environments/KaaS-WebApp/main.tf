@@ -4,6 +4,8 @@
 resource "random_string" "value" {
   length  = 3
   upper = false
+  lower = true
+  special = false
 }
 
 ##############################

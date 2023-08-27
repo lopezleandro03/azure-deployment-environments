@@ -1,10 +1,18 @@
-name: KaaS-WebApp
-summary: Creates a web app environment on KaaS
-description: Creates a web app environment on KaaS
+name: Kubernetes-WebApp
+summary: Creates a web app environment on Kubernetes
+description: Creates a web app environment on Kubernetes
 runner: Terraform
 templatePath: main.tf
 parameters:
   - id: "app_name"
     name: "App Name"
     required: true
+    type: "string"
+  - id: "container_image"
+    name: "Container Image"
+    required: false
+    type: "string"
+  - id: "env_vars"
+    name: "Environment Variables"
+    required: false
     type: "string"
