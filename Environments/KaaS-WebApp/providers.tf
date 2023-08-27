@@ -11,9 +11,16 @@ terraform {
     random = {
       source  = "hashicorp/random"
     }
+    azapi = {
+      source  = "azure/azapi"
+      version = "~>1.8.0"
+    }
   }
 
   required_version = ">= 1.0.0"
+}
+
+provider "azapi" {
 }
 
 provider "azurerm" {

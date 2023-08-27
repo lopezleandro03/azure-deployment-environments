@@ -20,7 +20,7 @@ spec:
         image: ghost
         env:
         - name: url
-          value: https://ade-kaas-demo.westeurope.cloudapp.azure.com/${app_name}
+          value: https://${app_host}/${app_name}
         - name: NODE_ENV
           value: development
         resources:

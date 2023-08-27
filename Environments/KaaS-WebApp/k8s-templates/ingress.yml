@@ -11,10 +11,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - ade-kaas-demo.westeurope.cloudapp.azure.com
+    - ${app_host}
     # secretName: {{Kubernetes Secret name with TLS/SSL Certificate}}
   rules:
-  - host: ade-kaas-demo.westeurope.cloudapp.azure.com
+  - host: ${app_host}
     http:
       paths:
       - path: /${app_name}

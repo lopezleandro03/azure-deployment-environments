@@ -13,5 +13,11 @@ variable "key_vault_id" {
 variable "app_name" {
   type        = string
   description = "The name of the application."
-  default = "ghost2"
+  default = "ghost3"
+}
+
+variable "resource_group_name" {
+    type        = string
+    description = "The name of the resource group to create the App Service Plan in."
+    default     = "rg-azd-devcenter"
 }

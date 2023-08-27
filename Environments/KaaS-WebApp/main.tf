@@ -6,13 +6,23 @@ resource "random_string" "value" {
   upper = false
 }
 
+##############################
+# fetch resource group
+##############################
+data "azurerm_resource_group" "rg" {
+  name = var.resource_group_name
+}
+
+
 locals {
   k8s_app_name = "${var.app_name}-${random_string.value.result}"
+  k8s_app_host = "ade-kaas-demo.westeurope.cloudapp.azure.com"
   k8s_name = "aks-kaas"
   k8s_state_branch = "main"
   k8s_state_cluster_root = "clusters/${local.k8s_name}"
   k8s_state_cluster_apps = "apps"
   k8s_templates = "k8s-templates"
+  workbook_name = uuid()
 }
 
 ##############################
@@ -68,7 +78,8 @@ resource "github_repository_file" "k8s_deployment" {
   branch              = local.k8s_state_branch
   file                = "${local.k8s_state_cluster_apps}/${local.k8s_app_name}/deployment.yml"
   content             = templatefile("${local.k8s_templates}/deployment.yml", {
-    app_name = local.k8s_app_name
+    app_name = local.k8s_app_name,
+    app_host = local.k8s_app_host
   })
   commit_message      = "Managed by Terraform"
   commit_author       = "Azure Deployment Environments Processor"
@@ -98,7 +109,8 @@ resource "github_repository_file" "k8s_ingress" {
   branch              = local.k8s_state_branch
   file                = "${local.k8s_state_cluster_apps}/${local.k8s_app_name}/ingress.yml"
   content             = templatefile("${local.k8s_templates}/ingress.yml", {
-    app_name = local.k8s_app_name
+    app_name = local.k8s_app_name,
+    app_host = local.k8s_app_host
   })
   commit_message      = "Managed by Terraform"
   commit_author       = "Azure Deployment Environments Processor"
@@ -129,4 +141,27 @@ resource "github_repository_file" "flux_kustomization" {
     github_repository_file.k8s_service,
     github_repository_file.k8s_ingress
   ]
+}
+
+##############################
+# Output in azure workbook
+##############################
+resource "azapi_resource" "workbook" {
+  type = "Microsoft.Insights/workbooks@2022-04-01"
+  name = local.workbook_name
+  location = data.azurerm_resource_group.rg.location
+  parent_id = data.azurerm_resource_group.rg.id
+  body = jsonencode({
+    properties = {
+      category = "Info"
+      description = "Application metadata"
+      displayName = "Application metadata"
+      sourceId = data.azurerm_resource_group.rg.id
+      serializedData = templatefile("workbook-template/workbook.json", 
+        {
+            app_url = "https://${local.k8s_app_host}/${local.k8s_app_name}"
+        })
+    }
+    kind = "shared"
+  })
 }
