@@ -16,3 +16,7 @@ parameters:
     name: "Environment Variables"
     required: false
     type: "string"
+  - id: "key_vault_id"
+    name: "Key Vault ID"
+    required: false
+    type: "string"

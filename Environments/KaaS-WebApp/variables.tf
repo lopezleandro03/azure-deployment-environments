@@ -7,7 +7,7 @@ variable "k8s_state_repo" {
 variable "key_vault_id" {
   type        = string
   description = "The ID of the Azure Key Vault to store the GitHub token in."
-  default     = "/subscriptions/4ad9490b-017e-4a82-8892-39c294f3af9c/resourceGroups/rg-azd-devcenter/providers/Microsoft.KeyVault/vaults/akv-ntawodiyy2yzy"
+  default     = "/subscriptions/4ad9490b-017e-4a82-8892-39c294f3af9c/resourceGroups/rg-dev-center-ade/providers/Microsoft.KeyVault/vaults/akv-yzcyothmmzixn"
 }
 
 variable "app_name" {
